@@ -17,6 +17,8 @@ with open(filename) as json_data:
     data = json.load(json_data)
     tags = "tags"
     paths = "paths"
+    schemas = "schemas"
+    components = "components"
 
     tags_to_remove = []
     for tag in data[tags]:
@@ -29,9 +31,9 @@ with open(filename) as json_data:
         if path.lower().startswith(tuple(paths_to_leave)) is False:
             del data[paths][path]
 
-    for schema in list(data["components"]["schemas"]):
+    for schema in list(data[components][schemas]):
         if schema not in collections_to_leave:
-            del data["components"]["schemas"][schema]
+            del data[components][schemas][schema]
 
 with open("modified-" + filename, 'w') as f:
     json.dump(data, f, indent=4)
