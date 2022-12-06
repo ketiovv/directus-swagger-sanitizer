@@ -1,8 +1,11 @@
 import json
 import re
 
-custom_collections = ["ItemsApps", "ItemsOrganizations", "ItemsRoles"]
-directus_collections = ["Users"]
+filename = "swagger.json"
+
+# Add collection names here
+custom_collections = ["ItemsExample"]
+directus_collections = ["Example"]
 
 collections_to_leave = custom_collections + directus_collections
 
@@ -10,7 +13,7 @@ paths_to_leave = []
 for collection in collections_to_leave:
     paths_to_leave.append(re.sub('([A-Z]{1})', r'/\1', collection).lower())
 
-with open("swagger.json") as json_data:
+with open(filename) as json_data:
     data = json.load(json_data)
     tags = "tags"
     paths = "paths"
@@ -30,5 +33,5 @@ with open("swagger.json") as json_data:
         if schema not in collections_to_leave:
             del data["components"]["schemas"][schema]
 
-with open("modified-swagger.json", 'w') as f:
+with open("modified-" + filename, 'w') as f:
     json.dump(data, f, indent=4)
