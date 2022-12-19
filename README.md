@@ -14,4 +14,6 @@ directus_collections = ["Example"]
 - for custom collections, use the `custom_collections` - remember the `Items` prefix for each collection(e.g. for the `Cars` collection it will be `ItemsCars`)
 - for default directus collections use the `directus_collections`
 
-Then just put file `swagger.json` into the project directory and run script `main.py` with python.
+Then just put file `swagger.json` into the project directory and run script `main.py` with python. 
+
+It will return a second swagger file named `modified-swagger.json` with the desired result.
